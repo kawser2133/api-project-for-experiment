@@ -1,4 +1,6 @@
-# Clean Structured API Project - ASP.NET Core
+# API project for various types of experiment
+
+## Followed- [Clean Structured API Project – ASP.NET Core](https://github.com/kawser2133/clean-structured-api-project)
 
 This template is for a clean structured ASP.NET Core API project, following the RESTful principles, Clean Architecture principles, SOLID design principles, implementing the Dependency Injection, Repository, and Unit of Work design pattern, and utilizing Entity Framework Core for data access. It provides a standardized structure and organization for building robust and maintainable ASP.NET Core API applications with complete CRUD (Create, Read, Update, Delete) operations.
 
@@ -77,14 +79,3 @@ Make sure to update the routes, validation, and error-handling logic to align wi
 ## Authors
 
 If you have any questions or need further assistance, please contact the project author at [@kawser2133](https://www.github.com/kawser2133) || [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kawser2133)
-
-<a href="https://www.buymeacoffee.com/kawser" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a><br/>
-**Thanks for your support!**
-
-## Contributing
-
-I want you to know that contributions to this project are welcome. Please open an issue or submit a pull request if you have any ideas, bug fixes, or improvements.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
