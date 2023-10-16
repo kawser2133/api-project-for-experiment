@@ -27,16 +27,16 @@ namespace Project.API.Extensions
             return await _orderController.Get(7);
         }
 
-        [Benchmark]
-        public async Task<IActionResult> GetOrderList()
-        {
-            return await _orderController.Get();
-        }
+        //[Benchmark]
+        //public async Task<IActionResult> GetOrderList()
+        //{
+        //    return await _orderController.Get();
+        //}
 
-        [Benchmark]
-        public async Task<IActionResult> GetPaginatedOrderList()
-        {
-            return await _orderController.Get(2, 50);
-        }
+        //[Benchmark]
+        //public async Task<IActionResult> GetPaginatedOrderList()
+        //{
+        //    return await _orderController.Get(2, 50);
+        //}
     }
 }
