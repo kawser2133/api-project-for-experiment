@@ -21,17 +21,17 @@ namespace Project.API.Extensions
             _orderController = new OrderController(logger, orderService);
         }
 
-        [Benchmark]
-        public async Task<IActionResult> GetOrderById()
-        {
-            return await _orderController.Get(7);
-        }
-
         //[Benchmark]
-        //public async Task<IActionResult> GetOrderList()
+        //public async Task<IActionResult> GetOrderById()
         //{
-        //    return await _orderController.Get();
+        //    return await _orderController.Get(7);
         //}
+
+        [Benchmark]
+        public async Task<IActionResult> GetOrderList()
+        {
+            return await _orderController.Get();
+        }
 
         //[Benchmark]
         //public async Task<IActionResult> GetPaginatedOrderList()
