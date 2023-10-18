@@ -113,7 +113,7 @@ namespace Project.API.Controllers
 
         // POST api/order
         [HttpPost]
-        public async Task<IActionResult> Create(OrderViewModel model)
+        public async Task<IActionResult> Create(OrderViewModel model, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
@@ -121,7 +121,7 @@ namespace Project.API.Controllers
 
                 try
                 {
-                    var data = await _orderService.Create(model);
+                    var data = await _orderService.Create(model, cancellationToken);
                     return Ok(data);
                 }
                 catch (Exception ex)

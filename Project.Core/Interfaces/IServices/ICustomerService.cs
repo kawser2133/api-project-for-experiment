@@ -15,7 +15,7 @@ namespace Project.Core.Interfaces.IServices
         Task<CustomerViewModel> GetCustomer(int id);
         Task<bool> IsExists(string key, string value);
         Task<bool> IsExistsForUpdate(int id, string key, string value);
-        Task<CustomerViewModel> Create(CustomerViewModel model);
+        Task<CustomerViewModel> Create(CustomerViewModel model, CancellationToken cancellationToken);
         Task Update(CustomerViewModel model);
         Task Delete(int id);
     }

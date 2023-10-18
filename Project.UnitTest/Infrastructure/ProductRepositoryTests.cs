@@ -27,6 +27,7 @@ namespace Project.UnitTest.Infrastructure
         [Test]
         public async Task AddAsync_ValidProduct_ReturnsAddedProduct()
         {
+            var cancellationToken = new CancellationToken(canceled: true);
 
             // Arrange
             var newProduct = new Product
@@ -46,7 +47,7 @@ namespace Project.UnitTest.Infrastructure
                             .ReturnsAsync((EntityEntry<Product>)null);
 
             // Act
-            var result = await _productRepository.Create(newProduct);
+            var result = await _productRepository.Create(newProduct, cancellationToken);
 
 
             // Assert

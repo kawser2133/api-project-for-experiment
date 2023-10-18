@@ -77,17 +77,17 @@ namespace Project.Infrastructure.Repositories
         }
 
 
-        public async Task<T> Create(T model)
+        public async Task<T> Create(T model, CancellationToken cancellationToken)
         {
-            await _dbContext.Set<T>().AddAsync(model);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.Set<T>().AddAsync(model, cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
             return model;
         }
 
-        public async Task CreateRange(List<T> model)
+        public async Task CreateRange(List<T> model, CancellationToken cancellationToken)
         {
-            await _dbContext.Set<T>().AddRangeAsync(model);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.Set<T>().AddRangeAsync(model, cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         public async Task Update(T model)

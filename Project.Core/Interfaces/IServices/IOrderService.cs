@@ -17,7 +17,7 @@ namespace Project.Core.Interfaces.IServices
         OrderViewModel GetOrderSync(int id);
         Task<bool> IsExists(string key, string value);
         Task<bool> IsExistsForUpdate(int id, string key, string value);
-        Task<OrderViewModel> Create(OrderViewModel model);
+        Task<OrderViewModel> Create(OrderViewModel model, CancellationToken cancellationToken);
         Task Update(OrderViewModel model);
         Task Delete(int id);
     }

@@ -81,7 +81,7 @@ namespace Project.API.Controllers
 
         // POST api/product
         [HttpPost]
-        public async Task<IActionResult> Create(ProductViewModel model)
+        public async Task<IActionResult> Create(ProductViewModel model, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace Project.API.Controllers
 
                 try
                 {
-                    var data = await _productService.Create(model);
+                    var data = await _productService.Create(model, cancellationToken);
                     return Ok(data);
                 }
                 catch (Exception ex)

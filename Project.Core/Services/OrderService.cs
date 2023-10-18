@@ -157,7 +157,7 @@ namespace Project.Core.Services
             return await _orderRepository.IsExistsForUpdate(id, key, value);
         }
 
-        public async Task<OrderViewModel> Create(OrderViewModel model)
+        public async Task<OrderViewModel> Create(OrderViewModel model, CancellationToken cancellationToken)
         {
             //Manual mapping
             var order = new Order
@@ -169,7 +169,7 @@ namespace Project.Core.Services
                 Description = model.Description,
                 EntryDate = DateTime.Now
             };
-            var orderData = await _orderRepository.Create(order);
+            var orderData = await _orderRepository.Create(order, cancellationToken);
             var orderDetails = new List<OrderDetails>();
 
             foreach (var item in model.OrderDetails)
@@ -184,7 +184,7 @@ namespace Project.Core.Services
                     EntryDate = DateTime.Now
                 });
             }
-            await _orderDetailsRepository.CreateRange(orderDetails);
+            await _orderDetailsRepository.CreateRange(orderDetails, cancellationToken);
 
             return _orderViewModelMapper.MapModel(orderData);
         }

@@ -30,6 +30,8 @@ namespace Project.UnitTest
                 _productMapperMock.Object,
                 _productRepositoryMock.Object);
 
+            var cancellationToken = new CancellationToken(canceled: true);
+
             var newProductViewModel = new ProductViewModel
             {
                 Code = "P001",
@@ -51,14 +53,14 @@ namespace Project.UnitTest
             _productMapperMock.Setup(mapper => mapper.MapModel(newProductViewModel))
                               .Returns(createdProduct);
 
-            _productRepositoryMock.Setup(repo => repo.Create(createdProduct))
+            _productRepositoryMock.Setup(repo => repo.Create(createdProduct, cancellationToken))
                                   .ReturnsAsync(createdProduct);
 
             _productViewModelMapperMock.Setup(mapper => mapper.MapModel(createdProduct))
                                        .Returns(newProductViewModel);
 
             // Act
-            var result = await productService.Create(newProductViewModel);
+            var result = await productService.Create(newProductViewModel, cancellationToken);
 
             // Assert
             Assert.NotNull(result);

@@ -17,8 +17,8 @@ namespace Project.Core.Interfaces.IRepositories
         Task<T> GetById<Tid>(Tid id);
         Task<bool> IsExists<Tvalue>(string key, Tvalue value);
         Task<bool> IsExistsForUpdate<Tid>(Tid id, string key, string value);
-        Task<T> Create(T model);
-        Task CreateRange(List<T> model);
+        Task<T> Create(T model, CancellationToken cancellationToken);
+        Task CreateRange(List<T> model, CancellationToken cancellationToken);
         Task Update(T model);
         Task Delete(T model);
         Task SaveChangeAsync();

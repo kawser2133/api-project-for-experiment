@@ -15,7 +15,7 @@ namespace Project.Core.Interfaces.IServices
         Task<ProductViewModel> GetProduct(int id);
         Task<bool> IsExists(string key, string value);
         Task<bool> IsExistsForUpdate(int id, string key, string value);
-        Task<ProductViewModel> Create(ProductViewModel model);
+        Task<ProductViewModel> Create(ProductViewModel model, CancellationToken cancellationToken);
         Task Update(ProductViewModel model);
         Task Delete(int id);
         Task<double> PriceCheck(int productId);

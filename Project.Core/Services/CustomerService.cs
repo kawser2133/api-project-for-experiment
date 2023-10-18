@@ -61,13 +61,13 @@ namespace Project.Core.Services
             return await _customerRepository.IsExistsForUpdate(id, key, value);
         }
 
-        public async Task<CustomerViewModel> Create(CustomerViewModel model)
+        public async Task<CustomerViewModel> Create(CustomerViewModel model, CancellationToken cancellationToken)
         {
             //Mapping through AutoMapper
             var entity = _customerMapper.MapModel(model);
             entity.EntryDate = DateTime.Now;
 
-            return _customerViewModelMapper.MapModel(await _customerRepository.Create(entity));
+            return _customerViewModelMapper.MapModel(await _customerRepository.Create(entity, cancellationToken));
         }
 
         public async Task Update(CustomerViewModel model)

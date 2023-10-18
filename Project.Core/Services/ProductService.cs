@@ -61,12 +61,12 @@ namespace Project.Core.Services
             return await _productRepository.IsExistsForUpdate(id, key, value);
         }
 
-        public async Task<ProductViewModel> Create(ProductViewModel model)
+        public async Task<ProductViewModel> Create(ProductViewModel model, CancellationToken cancellationToken)
         {
             //Mapping through AutoMapper
             var entity = _productMapper.MapModel(model);
             entity.EntryDate = DateTime.Now;
-            return _productViewModelMapper.MapModel(await _productRepository.Create(entity));
+            return _productViewModelMapper.MapModel(await _productRepository.Create(entity, cancellationToken));
         }
 
         public async Task Update(ProductViewModel model)
