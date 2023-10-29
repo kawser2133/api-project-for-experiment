@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.UnitTest", "Project
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.API", "Project.API\Project.API.csproj", "{E80FE11C-4A4B-456B-A79A-9201F5A11060}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B_SDK", "B_SDK\B_SDK.csproj", "{2E7CA016-8C01-4000-9E6E-3817D7FFB5AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E80FE11C-4A4B-456B-A79A-9201F5A11060}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E80FE11C-4A4B-456B-A79A-9201F5A11060}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E80FE11C-4A4B-456B-A79A-9201F5A11060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E7CA016-8C01-4000-9E6E-3817D7FFB5AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E7CA016-8C01-4000-9E6E-3817D7FFB5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E7CA016-8C01-4000-9E6E-3817D7FFB5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E7CA016-8C01-4000-9E6E-3817D7FFB5AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
