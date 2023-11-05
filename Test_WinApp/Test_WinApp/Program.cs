@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
+using System.IO;
 using System.ServiceModel.Web;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Test_WinApp
@@ -20,10 +17,13 @@ namespace Test_WinApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Program.Host = new CorsEnabledServiceHost(typeof(Service1), new Uri[] { new Uri("http://localhost:9119") });
+
+            Directory.SetCurrentDirectory(Path.Combine(Application.StartupPath, "Lib"));
+
+            Program.Host = new WebServiceHost(typeof(Service1), new Uri("http://localhost:8200"));
             Program.Host.Open();
             Application.Run(new Form1());
-            Host.Close();
+            Program.Host.Close();
         }
     }
 }

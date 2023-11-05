@@ -13,6 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -23,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,8 +34,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Morpho.MorphoAcquisition">
+      <HintPath>..\..\New Bio Service\New Bio Service\bio-service\Bio Service\BioService.Core\Lib\Morpho.MorphoAcquisition.dll</HintPath>
+    </Reference>
+    <Reference Include="Morpho.MorphoSmart">
+      <HintPath>..\..\New Bio Service\New Bio Service\bio-service\Bio Service\BioService.Core\Lib\Morpho.MorphoSmart.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -52,24 +61,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CorsConstants.cs" />
-    <Compile Include="CorsEnabledAttribute.cs" />
-    <Compile Include="CorsEnabledMessageInspector.cs" />
-    <Compile Include="CorsEnabledServiceHost.cs" />
-    <Compile Include="CorsEnabledServiceHostFactory.cs" />
-    <Compile Include="EnableCorsEndpointBehavior.cs" />
+    <Compile Include="BiometricService.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IEventService.cs" />
     <Compile Include="IService1.cs" />
-    <Compile Include="PreflightOperationBehavior.cs" />
-    <Compile Include="PreflightOperationInvoker.cs" />
+    <Compile Include="MorphoDeviceService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service1.cs" />
+    <Compile Include="TCapture\Core\Device\CaptureData.cs" />
+    <Compile Include="TCapture\Core\Device\DeviceVendor.cs" />
+    <Compile Include="TCapture\Core\FingerCode.cs" />
+    <Compile Include="TCapture\Core\Global.cs" />
+    <Compile Include="TCapture\Core\HandSide.cs" />
+    <Compile Include="TCapture\Core\Utils\Direction.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -78,6 +88,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -91,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\B_Service\B_Service.csproj">
+      <Project>{5bc1b130-ec6e-48bc-a772-7fb192902180}</Project>
+      <Name>B_Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

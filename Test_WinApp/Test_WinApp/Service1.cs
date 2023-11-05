@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BCAP;
+using Morpho.MorphoSmart;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +17,13 @@ namespace Test_WinApp
     {
         public Stream Capture(string fingerId)
         {
+
+            MorphoSmartDevice morphoSmart = new MorphoSmartDevice();
+
+            var connectedDevice = morphoSmart.GetConnectedDevices();
+            var connected = connectedDevice?.Length ?? 0;
+
+
             FingerCaptureResult result = new FingerCaptureResult();
 
             result.MSG = "Device not found, please plug your device properly.";
@@ -22,6 +31,8 @@ namespace Test_WinApp
             WebOperationContext.Current.OutgoingResponse.ContentType = "application/json; charset=utf-8";
             return new MemoryStream(Encoding.UTF8.GetBytes(new JavaScriptSerializer().Serialize(result)));
         }
+
+
     }
 
     public class FingerCaptureResult

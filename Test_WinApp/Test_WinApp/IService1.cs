@@ -15,7 +15,6 @@ namespace Test_WinApp
     public interface IService1
     {
         [OperationContract]
-        [CorsEnabled]
         [WebInvoke(UriTemplate = "/capture/{fingerId}", Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         Stream Capture(string fingerId);
