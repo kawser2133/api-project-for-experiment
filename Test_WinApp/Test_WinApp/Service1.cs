@@ -1,11 +1,5 @@
-﻿using BCAP;
-using Morpho.MorphoSmart;
-using System;
-using System.Collections.Generic;
+﻿using B_Service;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Web.Script.Serialization;
@@ -17,19 +11,24 @@ namespace Test_WinApp
     {
         public Stream Capture(string fingerId)
         {
+            try
+            {
+                var morphoDll = MorphoDeviceTest.DeviceAccessMorpho();
+                var morphoSDK = MorphoDeviceTest.DeviceAccessMorphoSdk();
 
-            MorphoSmartDevice morphoSmart = new MorphoSmartDevice();
+                FingerCaptureResult result = new FingerCaptureResult();
+                result.imageFileDll = morphoDll;
+                result.imageFileSDK = morphoSDK;
 
-            var connectedDevice = morphoSmart.GetConnectedDevices();
-            var connected = connectedDevice?.Length ?? 0;
+                WebOperationContext.Current.OutgoingResponse.ContentType = "application/json; charset=utf-8";
+                return new MemoryStream(Encoding.UTF8.GetBytes(new JavaScriptSerializer().Serialize(result)));
+            }
+            catch (System.Exception ex)
+            {
+                WebOperationContext.Current.OutgoingResponse.ContentType = "application/json; charset=utf-8";
+                return new MemoryStream(Encoding.UTF8.GetBytes(new JavaScriptSerializer().Serialize(ex.Message)));
+            }
 
-
-            FingerCaptureResult result = new FingerCaptureResult();
-
-            result.MSG = "Device not found, please plug your device properly.";
-
-            WebOperationContext.Current.OutgoingResponse.ContentType = "application/json; charset=utf-8";
-            return new MemoryStream(Encoding.UTF8.GetBytes(new JavaScriptSerializer().Serialize(result)));
         }
 
 
@@ -37,6 +36,8 @@ namespace Test_WinApp
 
     public class FingerCaptureResult
     {
+        public string imageFileDll { get; set; }
+        public string imageFileSDK { get; set; }
         public string MSG { get; set; }
     }
 }
