@@ -68,13 +68,11 @@ namespace B_Service
             morphoSmart.RegisterQualityEvent(QualityHandler);
 
             var enrollData = morphoSmart.Enroll();
-            string imageFile = Convert.ToBase64String(enrollData.ImageList[0].Image);
-
 
             var finger_image = WSQCodecAPI.BmpToBase64(WSQCodecAPI.ByteToBitmap(enrollData.ImageList[0].Image, enrollData.ImageList[0].Width, enrollData.ImageList[0].Height));
-            var wsq_image = Convert.ToBase64String(EncoderHelper.RSAEncrypt(WSQCodecAPI.GenWSQImage(enrollData.ImageList[0].Image, enrollData.ImageList[0].Width, enrollData.ImageList[0].Height), EncoderHelper.GetToken(), 128));
+            var wsq_image = Convert.ToBase64String(TCapHelper.RSAEncrypt(WSQCodecAPI.GenWSQImage(enrollData.ImageList[0].Image, enrollData.ImageList[0].Width, enrollData.ImageList[0].Height), TCapHelper.GetToken(), 128));
 
-            return imageFile;
+            return finger_image;
         }
         private static int eval_a(IntPtr ftrHandler, MorphoDevice.DataBit bit, IntPtr A_2)
         {
@@ -342,9 +340,11 @@ namespace B_Service
                 num4 = 6;
                 MorphoDevice.ReleaseResource(WSQCodec.DSAKey);
             }
-            string file = Convert.ToBase64String(this.imageBytes);
 
-            return file;
+            var finger_image = WSQCodecAPI.BmpToBase64(WSQCodecAPI.ByteToBitmap(this.imageBytes, num1, num2));
+            var wsq_image = Convert.ToBase64String(TCapHelper.RSAEncrypt(WSQCodecAPI.GenWSQImage(this.imageBytes, num1, num2), TCapHelper.GetToken(), 128));
+
+            return finger_image;
         }
 
         private void eval_m_o()
