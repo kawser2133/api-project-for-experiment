@@ -1,0 +1,112 @@
+{
+  "projects": [
+    {
+      "key": "NGO-PROJ1",
+      "name": "Community Empowerment Initiative",
+      "description": "An initiative to empower local communities through education and healthcare.",
+      "lead": "Kawser Hamid",
+      "issues": [
+        {
+          "key": "NGO-PROJ1-1",
+          "summary": "School Construction",
+          "description": "Constructing a new school building for the community.",
+          "assignee": "joseph.kumar",
+          "reporter": "Kawser Hamid",
+          "status": "In Progress",
+          "priority": "High",
+          "duedate": "2023-12-15",
+          "components": ["Construction"],
+          "labels": ["Education", "Infrastructure"],
+          "sprint": "Initiative Sprint 1",
+          "storyPoints": 13,
+          "comments": [
+            {
+              "author": "joseph.kumar",
+              "body": "Started the foundation work."
+            },
+            {
+              "author": "Kawser Hamid",
+              "body": "Great progress!"
+            }
+          ]
+        },
+        {
+          "key": "NGO-PROJ1-2",
+          "summary": "Health Clinic Setup",
+          "description": "Setting up a healthcare clinic to provide basic medical services.",
+          "assignee": "sara.wang",
+          "reporter": "joseph.kumar",
+          "status": "To Do",
+          "priority": "Medium",
+          "duedate": "2024-01-31",
+          "components": ["Healthcare"],
+          "labels": ["Health", "Infrastructure"],
+          "sprint": "Initiative Sprint 2",
+          "storyPoints": 8,
+          "comments": [
+            {
+              "author": "sara.wang",
+              "body": "Preparing the equipment list."
+            },
+            {
+              "author": "joseph.kumar",
+              "body": "Scheduled site visit for next week."
+            }
+          ]
+        },
+        {
+          "key": "NGO-PROJ1-3",
+          "summary": "Community Workshops",
+          "description": "Organizing educational workshops for skill development.",
+          "assignee": "Kawser Hamid",
+          "reporter": "sara.wang",
+          "status": "To Do",
+          "priority": "High",
+          "duedate": "2024-02-15",
+          "components": ["Education"],
+          "labels": ["Education", "Community Outreach"],
+          "sprint": "Initiative Sprint 3",
+          "storyPoints": 5,
+          "comments": [
+            {
+              "author": "Kawser Hamid",
+              "body": "Planning the curriculum."
+            },
+            {
+              "author": "sara.wang",
+              "body": "Reached out to local educators for collaboration."
+            }
+          ]
+        },
+        {
+          "key": "NGO-PROJ1-4",
+          "summary": "Community Health Awareness Campaign",
+          "description": "Conducting a health awareness campaign within the community.",
+          "assignee": "joseph.kumar",
+          "reporter": "Kawser Hamid",
+          "status": "In Progress",
+          "priority": "Critical",
+          "duedate": "2024-03-01",
+          "components": ["Healthcare", "Community Outreach"],
+          "labels": ["Health", "Community Outreach"],
+          "sprint": "Initiative Sprint 4",
+          "storyPoints": 10,
+          "comments": [
+            {
+              "author": "joseph.kumar",
+              "body": "Drafting the awareness materials."
+            },
+            {
+              "author": "Kawser Hamid",
+              "body": "Scheduled a training session for volunteers."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  
+  "components": ["Construction", "Healthcare", "Education"],
+  "labels": ["Education", "Infrastructure", "Health", "Community Outreach"],
+  "sprints": ["Initiative Sprint 1", "Initiative Sprint 2", "Initiative Sprint 3", "Initiative Sprint 4"]
+}
