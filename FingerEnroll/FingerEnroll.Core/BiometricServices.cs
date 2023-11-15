@@ -1,8 +1,9 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace FingerEnroll.Core
 {
-    public static class CaptureService
+    public static class BiometricServices
     {
         public static CaptureData DeviceAccessMorpho()
         {
@@ -13,6 +14,20 @@ namespace FingerEnroll.Core
             var captureData = morphoDevice.CaptureFrame();
 
             return captureData;
+        }
+
+        public static int GetAnsiMatchingScore(string template1, string template2)
+        {
+            int score = 0;
+            if (!string.IsNullOrEmpty(template1) && !string.IsNullOrEmpty(template2))
+            {
+                byte[] tp1 = Convert.FromBase64String(template1);
+                byte[] tp2 = Convert.FromBase64String(template2);
+
+                bool res = WSQHelper.MatchingScore(tp1, tp2, ref score);
+            }
+
+            return score;
         }
     }
 

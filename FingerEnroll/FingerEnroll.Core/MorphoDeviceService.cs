@@ -55,7 +55,12 @@ namespace FingerEnroll.Core
                 this.captureData.FingerprintImageScore = ImageQuelity(this.imageBytes, num1, num2);
                 this.captureData.FingerprintImage = WSQHelper.BmpToBase64(WSQHelper.ByteToBitmap(this.imageBytes, num1, num2));
                 this.captureData.FingerprintData = Convert.ToBase64String(TCapHelper.RSAEncrypt(WSQHelper.GenWSQImage(bitmapToBytes, num1, num2), TCapHelper.GetToken(), 128));
-                //this.captureData.Template = Convert.ToBase64String(WSQHelper.GenIsoBytes(this.captureData.BmpImage));
+
+                if (this.captureData.BmpImage.Width % 4 == 0)
+                    this.captureData.Template = Convert.ToBase64String(WSQHelper.GenerateIsoBytes(bitmapToBytes));
+                else
+                    this.captureData.Template = Convert.ToBase64String(WSQHelper.GenerateAnsiBytes(bitmapToBytes));
+
                 MorphoDevice.ReleaseResource(WSQHelper.DSAKey);
             }
 

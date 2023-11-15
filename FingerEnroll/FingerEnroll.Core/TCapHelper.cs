@@ -85,6 +85,7 @@ namespace FingerEnroll.Core
 
             return numArray1;
         }
+
     }
 
     //Step 1.1

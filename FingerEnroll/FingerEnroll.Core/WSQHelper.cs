@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
-using SourceAFIS.Simple;
+using SecuGen.FDxSDKPro.Windows;
 
 namespace FingerEnroll.Core
 {
@@ -12,7 +12,7 @@ namespace FingerEnroll.Core
     {
         internal static string DSAKey = "<DSAKeyValue><P>18hCCdNJQWg0kw4B9iwpsHw2SCgLnuk4sbcZCY8vCasHaUh6+Nzxs7MH4PcfVqQTw3ToORp4/CvIWYC9SEmwvPPL2HJUb0pOo5b1ldnyD+LQaKD5thd6AhkBdyvrATdD6tXEin9bgLIyo98Gf0uLqG922dyF4MfvMM8cbwWPmGE=</P><Q>iNZ0oAOA451JhSC35hlKU//IAmc=</Q><G>sDP6WUGLehQ+EJOFnTtBE/ubvlR8aJnV43hxI35nojc3dC5xJsW4Y+ur3Xkg/GF9+ldZ8KwxhuwPvx0Wp0aRFJib1fpMS4fMqG3Jd9QDrTZx+XE7iTSO6TPfyCLzZBsrFC4jwJewpdYKoi8KGhbMdKxhRgNWL8wwfegk2hVTRZo=</G><Y>HzSbzGwv0y9r9pxtN4TzX4GFZRYGNhSkCiy4mF7uVzxHAW+FboCDR6gITfgMp0nZF1D2eyfuc6L+Qg4Eo2/GjOUYW0F1eijUBYBJ4Z8ru3Ps0Nih5sNcuM9KChMHEFt8JY7g/46qQd4Ust69jc+g+EcifcUf74244DCZCmDLOY8=</Y><J>AAAAAZOxFsQun6/hxZqOI6F8MFDvs7mQDdu35zD+0v3ebXQ+3+p0ItdFbtKQwV9GI1dSqgAtK43ElLNM2kR77teete8/93rhX8/Y7lqLV5UjuXB7Nza3gjMv73D7+zTa+UYWeJJSh6A+TesWpaIooA==</J><Seed>/yE+ihF8NohTaIbibqgHyg/R1ow=</Seed><PgenCounter>AVA=</PgenCounter><X>SLNUSLRaeVdS6tCY+8QZc8Fxi30=</X></DSAKeyValue>";
         private static float _flot_b = 0.75f;
-        private static AfisEngine afis;
+        private static SGFingerPrintManager _fpm;
 
         [DllImport("NCap.dll", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
         internal static extern bool CheckQuality(string key, IntPtr A_1, int width, int height, out int A_4, out float A_5);
@@ -481,19 +481,40 @@ namespace FingerEnroll.Core
             return palette;
         }
 
-        internal static byte[] GenIsoBytes(Bitmap bmp)
+        internal static byte[] GenerateIsoBytes(byte[] rawImage)
         {
-            byte[] iso_bytes = null;
-            Fingerprint fp2 = new Fingerprint();
-            fp2.AsBitmap = bmp;
-            Person person = new Person();
-            person.Fingerprints.Add(fp2);
+            byte[] minTemplate = new byte[346];
+            _fpm.SetTemplateFormat(SGFPMTemplateFormat.ISO19794);
 
-            afis.Extract(person);
-            iso_bytes = fp2.AsIsoTemplate;
-            float matched = afis.Verify(person, person);
+            if (_fpm.CreateTemplate(rawImage, minTemplate) != 0)
+            {
+                return null;
+            }
 
-            return iso_bytes;
+            return minTemplate;
+        }
+
+        internal static byte[] GenerateAnsiBytes(byte[] rawImage)
+        {
+            /*ISO = 346
+            ANSI = 300
+            SG400 = 400*/
+            byte[] minTemplate = new byte[300];
+
+            if (_fpm.CreateTemplate(rawImage, minTemplate) != 0)
+            {
+                return null;
+            }
+
+            return minTemplate;
+        }
+
+        internal static bool MatchingScore(byte[] template1, byte[] template2, ref int score)
+        {
+            bool matched = false;
+            _fpm.GetMatchingScore(template1, template2, ref score);
+            _fpm.MatchTemplate(template1, template2, SGFPMSecurityLevel.HIGH, ref matched);
+            return matched;
         }
 
         internal struct Eval_A
