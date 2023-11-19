@@ -481,12 +481,13 @@ namespace FingerEnroll.Core
             return palette;
         }
 
-        internal static byte[] GenerateIsoBytes(byte[] rawImage)
+        public static byte[] GenerateIsoBytes(byte[] rawImage)
         {
             byte[] minTemplate = new byte[346];
-            _fpm.SetTemplateFormat(SGFPMTemplateFormat.ISO19794);
+            SGFingerPrintManager fpm = new SGFingerPrintManager();
+            fpm.SetTemplateFormat(SGFPMTemplateFormat.ISO19794);
 
-            if (_fpm.CreateTemplate(rawImage, minTemplate) != 0)
+            if (fpm.CreateTemplate(rawImage, minTemplate) != 0)
             {
                 return null;
             }
@@ -494,7 +495,7 @@ namespace FingerEnroll.Core
             return minTemplate;
         }
 
-        internal static byte[] GenerateAnsiBytes(byte[] rawImage)
+        public static byte[] GenerateAnsiBytes(byte[] rawImage)
         {
             /*ISO = 346
             ANSI = 300
@@ -509,12 +510,27 @@ namespace FingerEnroll.Core
             return minTemplate;
         }
 
-        internal static bool MatchingScore(byte[] template1, byte[] template2, ref int score)
+        public static bool MatchingScore(byte[] template1, byte[] template2, ref int score)
         {
             bool matched = false;
             _fpm.GetMatchingScore(template1, template2, ref score);
             _fpm.MatchTemplate(template1, template2, SGFPMSecurityLevel.HIGH, ref matched);
             return matched;
+        }
+
+        public static int ImageQuelity(byte[] imageBytes, int width, int height)
+        {
+            int img_score;
+            IntPtr intPtr = Marshal.AllocHGlobal((int)imageBytes.Length);
+            int num1 = 0;
+            float single = 0f;
+            Marshal.Copy(imageBytes, 0, intPtr, (int)imageBytes.Length);
+            CheckQuality(DSAKey, intPtr, width, height, out num1, out single);
+            Marshal.FreeHGlobal(intPtr);
+            img_score = num1 * 20;
+            img_score = 120 - img_score;
+
+            return img_score;
         }
 
         internal struct Eval_A
